@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.christinac.studentRoster.models.Dorm;
+import com.christinac.studentRoster.models.Student;
 import com.christinac.studentRoster.repositories.DormRepository;
 
 @Service
@@ -33,4 +34,5 @@ public class DormService {
 			return null;
 		}
 	}
+	
 }

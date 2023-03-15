@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.christinac.studentRoster.models.Dorm;
+import com.christinac.studentRoster.models.Student;
 import com.christinac.studentRoster.services.DormService;
 
 @Controller
@@ -30,7 +31,10 @@ public class HomeController {
 	}
 	
 	@GetMapping("/student/new")
-	public String newStudent() {
+	public String newStudent(@ModelAttribute("newStudent") Student newStudent, Model model) {
+		List<Dorm> allDorms = dormServ.findAll();
+		model.addAttribute("allDorms", allDorms);
 		return "newStudent.jsp";
 	}
+	
 }

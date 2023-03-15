@@ -30,47 +30,42 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <div class="d-flex justify-content-between align-items-center">
-      <h1><c:out value="${thisDorm.name}" /> Students</h1>
+      <h1 class="mb-0">Add a new student</h1>
       <a href="/" class="btn">Back To Home</a>
     </div>
     <hr />
-    <div class="d-flex text-center card p-3 mb-3">
-      <form action="/dorm/${thisDorm.id}/add-student" method="POST" modelAttribute="newDormStudent">
-          <label class="form-label" for="students">Students:</label>
-          <select name="students" class="form-select mb-3">
-            <c:forEach var="student" items="${allStudents}">
-                <c:if test="${student.dorm != thisDorm}">
-                    <option value="${student.id}">
-                      <c:out value="${student.name}" />
-                      (<c:out value="${student.dorm.name}" />)
-                    </option>
-                </c:if>
+    <div class="card p-3">
+      <form:form
+        action="/student/create"
+        method="POST"
+        modelAttribute="newStudent"
+      >
+        <div class="d-flex align-items-center mb-3">
+          <form:label for="name" path="name" class="me-4 col-2"
+            >Name:
+          </form:label>
+          <form:input type="text" class="form-control" for="name" path="name" />
+        </div>
+        <div class="d-flex align-items-center mb-3">
+          <form:label for="dorm" path="dorm" class="me-4 col-2"
+            >Name:
+          </form:label>
+          <select name="dorm" class="form-select">
+            <c:forEach var="dorm" items="${allDorms}">
+              <option value="${dorm.id}">
+                <c:out value="${dorm.name}"></c:out>
+              </option>
             </c:forEach>
           </select>
-          <button class="btn">Add</button>
         </div>
-      </form>
-    <div class="justify-content-center">
-      <table class="table text-center" id="directory">
-        <thead>
-          <tr>
-            <th>Dorm</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <c:forEach var="thisStudent" items="${thisDorm.students}">
-          <tr>
-            <td>
-              <c:out value="${thisStudent.name}"></c:out>
-            </td>
-            <td>
-              <a href="/student/${thisStudent.id}/delete/${thisDorm.id}" class="btn btn-action"
-                >Remove</a
-              >
-            </td>
-          </tr>
-        </c:forEach>
-      </table>
+        <div class="d-grid">
+          <form:errors
+            path="name"
+            class="alert alert-danger mb-3"
+          ></form:errors>
+          <button class="btn">Add Student</button>
+        </div>
+      </form:form>
     </div>
   </body>
 </html>
