@@ -12,14 +12,13 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Dorm Homepage</title>
+    <title>New Dorm</title>
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <!-- change to match your file/naming structure -->
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
     <!-- change to match your file/naming structure -->
-    <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -30,33 +29,26 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <div class="d-flex justify-content-between align-items-center">
-      <h1 class="mb-0">Dorms</h1>
+      <h1>Create a New Dorm</h1>
       <a href="/" class="btn">Back To Home</a>
     </div>
     <hr />
-    <div class="d-flex justify-content-start align-items-sm-baseline mb-4">
-      <a href="/dorm/new" class="btn me-3">Add a new Dorm</a>
-      <a href="/student/new" class="btn">Add a new Student</a>
-    </div>
-    <div class="justify-content-center">
-      <table class="table text-center" id="directory">
-        <thead>
-          <tr>
-            <th>Dorm</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <c:forEach var="dorm" items="${allDorms}">
-          <tr>
-            <td>
-              <c:out value="${dorm.name}"></c:out>
-            </td>
-            <td>
-              <a href="/dorm/${dorm.id}" class="btn btn-action">See Students</a>
-            </td>
-          </tr>
-        </c:forEach>
-      </table>
+    <div class="card p-3">
+      <form:form action="/dorm/create" method="POST" modelAttribute="newDorm">
+        <div class="d-flex align-items-center mb-3">
+          <form:label for="name" path="name" class="me-4 col-2"
+            >Name:
+          </form:label>
+          <form:input type="text" class="form-control" for="name" path="name" />
+        </div>
+        <div class="d-grid">
+          <form:errors
+            path="name"
+            class="alert alert-danger mb-3"
+          ></form:errors>
+          <button class="btn">Add Dorm</button>
+        </div>
+      </form:form>
     </div>
   </body>
 </html>

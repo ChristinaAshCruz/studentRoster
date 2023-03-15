@@ -12,7 +12,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Dorm Homepage</title>
+    <title>Project Name here</title>
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <!-- change to match your file/naming structure -->
@@ -30,13 +30,14 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <div class="d-flex justify-content-between align-items-center">
-      <h1 class="mb-0">Dorms</h1>
+      <h1><c:out value="${thisDorm.name}" /> Students</h1>
       <a href="/" class="btn">Back To Home</a>
     </div>
     <hr />
-    <div class="d-flex justify-content-start align-items-sm-baseline mb-4">
-      <a href="/dorm/new" class="btn me-3">Add a new Dorm</a>
-      <a href="/student/new" class="btn">Add a new Student</a>
+    <div class="d-flex justify-content-center align-items-center card p-3 mb-3">
+      <form action="#" method="POST" modelAttribute="newDormJoiner">
+        <div class="col-4"></div>
+      </form>
     </div>
     <div class="justify-content-center">
       <table class="table text-center" id="directory">
@@ -46,13 +47,15 @@ pageEncoding="UTF-8"%>
             <th>Actions</th>
           </tr>
         </thead>
-        <c:forEach var="dorm" items="${allDorms}">
+        <c:forEach var="student" items="${thisDorm.students}">
           <tr>
             <td>
-              <c:out value="${dorm.name}"></c:out>
+              <c:out value="${student.name}"></c:out>
             </td>
             <td>
-              <a href="/dorm/${dorm.id}" class="btn btn-action">See Students</a>
+              <a href="/student/${student.id}/delete" class="btn btn-action"
+                >Remove</a
+              >
             </td>
           </tr>
         </c:forEach>
